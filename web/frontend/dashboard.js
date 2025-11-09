@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 class NikeDashboard {
     constructor() {
-        this.apiBaseUrl = 'http://localhost:8001';
+        this.apiBaseUrl = 'https://visdat-nike.vercel.app';
         this.charts = {};
         this.zoomChart = null;
         this.filters = {
