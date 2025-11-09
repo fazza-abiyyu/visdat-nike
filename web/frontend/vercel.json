@@ -3,11 +3,21 @@
   "name": "nike-sales-dashboard",
   "builds": [
     {
+  "builds": [
+    {
       "src": "server.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
+    {
+      "src": "/dashboard.js",
+      "dest": "/dashboard.js"
+    },
+    {
+      "src": "/styles.css",
+      "dest": "/styles.css"
+    },
     {
       "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|ico|svg))",
       "dest": "/$1"
