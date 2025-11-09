@@ -4,10 +4,10 @@
   "description": "Frontend dashboard for Nike sales data visualization",
   "main": "index.html",
   "scripts": {
-    "start": "python -m http.server 8080",
-    "dev": "python -m http.server 8080",
-    "build": "echo 'No build process needed for static HTML/JS/CSS'",
-    "serve": "python -m http.server 8080",
+    "start": "npx serve -s . -p 8080",
+    "dev": "npx serve -s . -p 8080",
+    "build": "echo 'Static files ready for deployment'",
+    "serve": "npx serve -s . -p 8080",
     "test": "echo 'No tests specified'"
   },
   "keywords": [

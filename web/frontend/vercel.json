@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "public": true,
+  "name": "nike-sales-dashboard",
+  "builds": [
+    {
+      "src": "index.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ],
+  "functions": {},
+  "env": {
+    "NODE_VERSION": "18"
+  }
+}
