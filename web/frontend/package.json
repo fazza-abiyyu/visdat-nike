@@ -4,10 +4,10 @@
   "description": "Frontend dashboard for Nike sales data visualization",
   "main": "index.html",
   "scripts": {
-    "start": "npx serve -s . -p 8080",
-    "dev": "npx serve -s . -p 8080",
-    "build": "echo 'Static files ready for deployment'",
-    "serve": "npx serve -s . -p 8080",
+    "start": "node server.js",
+    "dev": "node server.js",
+    "build": "echo 'Express server ready for deployment'",
+    "serve": "node server.js",
     "test": "echo 'No tests specified'"
   },
   "keywords": [
@@ -20,11 +20,9 @@
   "author": "Your Name",
   "license": "MIT",
   "dependencies": {
-    "chart.js": "^4.4.0",
-    "chartjs-adapter-date-fns": "^3.0.0",
-    "chartjs-plugin-zoom": "^2.0.1"
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
   },
-  "devDependencies": {},
   "engines": {
     "node": ">=14.0.0"
   },

@@ -4,17 +4,21 @@
   "name": "nike-sales-dashboard",
   "builds": [
     {
-      "src": "index.html",
-      "use": "@vercel/static"
+      "src": "server.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/$1"
+      "dest": "server.js"
     }
   ],
-  "functions": {},
+  "functions": {
+    "server.js": {
+      "maxDuration": 30
+    }
+  },
   "env": {
     "NODE_VERSION": "18"
   }

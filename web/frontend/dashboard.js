@@ -28,7 +28,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
 class NikeDashboard {
     constructor() {
-        this.apiBaseUrl = 'https://visdat-nike.vercel.app';
+        // Auto-detect API URL based on current domain
+        const currentHost = window.location.hostname;
+        const currentPort = window.location.port;
+        const protocol = window.location.protocol;
+        
+        // If running on Vercel or custom domain, use that
+        if (currentHost === 'localhost' || currentHost === '127.0.0.1') {
+            // Local development
+            this.apiBaseUrl = 'https://visdat-nike.vercel.app';
+        } else if (currentPort === '8080') {
+            // Local with custom port
+            this.apiBaseUrl = 'https://visdat-nike.vercel.app';
+        } else {
+            // Production - use same domain with backend port or custom backend
+            this.apiBaseUrl = `${protocol}//${currentHost}:8001`;
+            // Or use hardcoded backend URL
+            // this.apiBaseUrl = 'https://your-backend-url.com';
+        }
         this.charts = {};
         this.zoomChart = null;
         this.filters = {
@@ -1017,7 +1034,7 @@ class NikeDashboard {
     async refreshCharts() {
         try {
             console.log('Refreshing charts with filters:', this.filters);
-            const response = await fetch('http://localhost:8003/filtered-data', {
+            const response = await fetch(`${this.apiBaseUrl}/filtered-data`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
