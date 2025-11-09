@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nike Sales Dashboard - Analisis Penjualan</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.0/dist/chartjs-plugin-zoom.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-chart-line"></i>
+                    <h1>Nike Analytics Dashboard</h1>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-secondary" id="refreshBtn">
+                        <i class="fas fa-sync-alt"></i>
+                        Refresh Data
+                    </button>
+                    <div class="last-updated">
+                        <span>Last Updated: </span>
+                        <span id="lastUpdated">--</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Filter Panel -->
+            <section class="filter-panel">
+                <div class="filter-header">
+                    <h3><i class="fas fa-filter"></i> Data Filters</h3>
+                    <button class="btn btn-outline" id="resetFilters">Reset Filters</button>
+    
+                </div>
+                <div class="filter-grid">
+                    <div class="filter-group">
+                        <label for="yearFilter">Year</label>
+                        <select id="yearFilter" multiple class="filter-select">
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="regionFilter">Region</label>
+                        <select id="regionFilter" multiple class="filter-select">
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="productFilter">Product</label>
+                        <select id="productFilter" multiple class="filter-select">
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="retailerFilter">Retailer</label>
+                        <select id="retailerFilter" multiple class="filter-select">
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Summary Cards -->
+            <section class="summary-section">
+                <div class="summary-grid" id="summaryCards">
+                    <!-- Summary cards will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Charts Grid -->
+            <section class="charts-section">
+                <div class="charts-grid">
+                    <!-- Monthly Trends Chart -->
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3><i class="fas fa-chart-line"></i> Monthly Sales Trends</h3>
+                            <div class="chart-controls">
+                                <button class="chart-control" data-chart="monthlyTrends" data-action="zoom">
+                                    <i class="fas fa-search-plus"></i>
+                                </button>
+                                <button class="chart-control" data-chart="monthlyTrends" data-action="reset">
+                                    <i class="fas fa-undo"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="monthlyTrendsChart"></canvas>
+                        </div>
+                        <div class="chart-description">
+                            <p><strong>Insight:</strong> Tren penjualan bulanan menunjukkan pola musiman dan pertumbuhan penjualan Nike di berbagai periode.</p>
+                        </div>
+                    </div>
+
+                    <!-- Top Products Chart -->
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3><i class="fas fa-trophy"></i> Top Performing Products</h3>
+                            <div class="chart-controls">
+                                <button class="chart-control" data-chart="topProducts" data-action="zoom">
+                                    <i class="fas fa-search-plus"></i>
+                                </button>
+                                <button class="chart-control" data-chart="topProducts" data-action="reset">
+                                    <i class="fas fa-undo"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="topProductsChart"></canvas>
+                        </div>
+                        <div class="chart-description">
+                            <p><strong>Insight:</strong> Produk-produk terlaris Nike berdasarkan total penjualan dan volume unit terjual.</p>
+                        </div>
+                    </div>
+
+                    <!-- Region Distribution Chart -->
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3><i class="fas fa-globe-americas"></i> Regional Sales Distribution</h3>
+                            <div class="chart-controls">
+                                <button class="chart-control" data-chart="regionDistribution" data-action="zoom">
+                                    <i class="fas fa-search-plus"></i>
+                                </button>
+                                <button class="chart-control" data-chart="regionDistribution" data-action="reset">
+                                    <i class="fas fa-undo"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="regionDistributionChart"></canvas>
+                        </div>
+                        <div class="chart-description">
+                            <p><strong>Insight:</strong> Distribusi penjualan Nike di berbagai wilayah Amerika Serikat menunjukkan performa regional.</p>
+                        </div>
+                    </div>
+
+                    <!-- Price Correlation Chart -->
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3><i class="fas fa-chart-scatter"></i> Price vs Units Correlation</h3>
+                            <div class="chart-controls">
+                                <button class="chart-control" data-chart="priceCorrelation" data-action="zoom">
+                                    <i class="fas fa-search-plus"></i>
+                                </button>
+                                <button class="chart-control" data-chart="priceCorrelation" data-action="reset">
+                                    <i class="fas fa-undo"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="priceCorrelationChart"></canvas>
+                        </div>
+                        <div class="chart-description">
+                            <p><strong>Insight:</strong> Korelasi antara harga per unit dan jumlah unit terjual membantu memahami elastisitas harga.</p>
+                        </div>
+                    </div>
+
+                    <!-- State Analysis Chart -->
+                    <div class="chart-container chart-wide">
+                        <div class="chart-header">
+                            <h3><i class="fas fa-map-marked-alt"></i> Top States Performance</h3>
+                            <div class="chart-controls">
+                                <button class="chart-control" data-chart="stateAnalysis" data-action="zoom">
+                                    <i class="fas fa-search-plus"></i>
+                                </button>
+                                <button class="chart-control" data-chart="stateAnalysis" data-action="reset">
+                                    <i class="fas fa-undo"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="stateAnalysisChart"></canvas>
+                        </div>
+                        <div class="chart-description">
+                            <p><strong>Insight:</strong> Analisis performa penjualan di negara bagian teratas memberikan insight geografis yang berharga.</p>
+                        </div>
+                    </div>
+
+                    <!-- Sales Method Analysis Chart -->
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3><i class="fas fa-shopping-cart"></i> Sales Method Analysis</h3>
+                            <div class="chart-controls">
+                                <button class="chart-control" data-chart="salesMethod" data-action="zoom">
+                                    <i class="fas fa-search-plus"></i>
+                                </button>
+                                <button class="chart-control" data-chart="salesMethod" data-action="reset">
+                                    <i class="fas fa-undo"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="salesMethodChart"></canvas>
+                        </div>
+                        <div class="chart-description">
+                            <p><strong>Insight:</strong> Analisis metode penjualan membantu memahami channel distribusi yang paling efektif.</p>
+                        </div>
+                    </div>
+
+                    <!-- Retailer Performance Chart -->
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3><i class="fas fa-store"></i> Retailer Performance</h3>
+                            <div class="chart-controls">
+                                <button class="chart-control" data-chart="retailerPerformance" data-action="zoom">
+                                    <i class="fas fa-search-plus"></i>
+                                </button>
+                                <button class="chart-control" data-chart="retailerPerformance" data-action="reset">
+                                    <i class="fas fa-undo"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="retailerPerformanceChart"></canvas>
+                        </div>
+                        <div class="chart-description">
+                            <p><strong>Insight:</strong> Performa retailer memberikan gambaran tentang mitra distribusi yang paling sukses.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Loading Dashboard Data...</p>
+        </div>
+    </div>
+
+    <!-- Tooltip -->
+    <div class="tooltip" id="tooltip"></div>
+
+    <!-- Zoom Modal -->
+    <div class="modal" id="zoomModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="zoomModalTitle">Chart Detail</h3>
+                <div class="modal-controls">
+                    <button class="chart-control" id="resetZoomChart" data-action="reset">
+                        <i class="fas fa-undo"></i>
+                    </button>
+                    <button class="modal-close" id="closeZoomModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <canvas id="zoomChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js?v=3.4"></script>
+</body>
+</html>

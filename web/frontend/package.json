@@ -1,0 +1,39 @@
+{
+  "name": "nike-sales-dashboard-frontend",
+  "version": "1.0.0",
+  "description": "Frontend dashboard for Nike sales data visualization",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8080",
+    "dev": "python -m http.server 8080",
+    "build": "echo 'No build process needed for static HTML/JS/CSS'",
+    "serve": "python -m http.server 8080",
+    "test": "echo 'No tests specified'"
+  },
+  "keywords": [
+    "nike",
+    "sales",
+    "dashboard",
+    "visualization",
+    "chart.js"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "chart.js": "^4.4.0",
+    "chartjs-adapter-date-fns": "^3.0.0",
+    "chartjs-plugin-zoom": "^2.0.1"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/nike-sales-dashboard.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/nike-sales-dashboard/issues"
+  },
+  "homepage": "https://github.com/yourusername/nike-sales-dashboard#readme"
+}

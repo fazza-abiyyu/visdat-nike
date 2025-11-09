@@ -1,0 +1,48 @@
+{
+  "name": "nike-sales-dashboard-backend",
+  "version": "1.0.0",
+  "description": "Backend API for Nike sales data dashboard",
+  "main": "main.py",
+  "scripts": {
+    "start": "python run.py",
+    "dev": "python -m uvicorn main:app --host 0.0.0.0 --port 8001 --reload",
+    "prod": "python -m uvicorn main:app --host 0.0.0.0 --port 8001",
+    "install-deps": "pip install -r requirements.txt",
+    "test": "python -m pytest tests/",
+    "lint": "python -m flake8 .",
+    "format": "python -m black ."
+  },
+  "keywords": [
+    "fastapi",
+    "python",
+    "api",
+    "nike",
+    "sales",
+    "data-analysis"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "fastapi": "^0.104.1",
+    "uvicorn": "^0.24.0",
+    "pandas": "^2.1.3",
+    "numpy": "^1.25.2",
+    "python-multipart": "^0.0.6"
+  },
+  "devDependencies": {
+    "pytest": "^7.4.3",
+    "flake8": "^6.1.0",
+    "black": "^23.11.0"
+  },
+  "engines": {
+    "python": ">=3.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/nike-sales-dashboard.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/nike-sales-dashboard/issues"
+  },
+  "homepage": "https://github.com/yourusername/nike-sales-dashboard#readme"
+}
