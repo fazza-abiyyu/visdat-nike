@@ -306,9 +306,9 @@ class NikeDashboard {
             this.apiBaseUrl = 'https://visdat-nike.vercel.app';
         } else {
             // Production - use same domain with backend port or custom backend
-            this.apiBaseUrl = `${protocol}//${currentHost}:8001`;
+            // this.apiBaseUrl = `${protocol}//${currentHost}:8001`;
             // Or use hardcoded backend URL
-            // this.apiBaseUrl = 'https://your-backend-url.com';
+            this.apiBaseUrl = 'https://visdat-nike.vercel.app';
         }
         this.charts = {};
         this.zoomChart = null;
