@@ -5,6 +5,9 @@
 ## 🔗 Live Demo
 Akses dashboard interaktif di sini: **[Nike Analytics Dashboard](https://visdat.leci.app)**
 
+## 🔗 Link Video
+Akses video presentasi : **[Video Presentation](https://telkomuniversityofficial-my.sharepoint.com/:v:/g/personal/evanrafifpradana_student_telkomuniversity_ac_id/EbW5WEG6oLlLlrNmLIvgsr8BHHpf5CoTSJGXV_J8EZD2Lg?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=jgRPkf)**
+
 ---
 
 ## 👥 Anggota Tim & Kontribusi
