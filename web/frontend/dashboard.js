@@ -1024,8 +1024,8 @@ class NikeDashboard {
             this.updateLastUpdated();
             
         } catch (error) {
-            console.error('Error refreshing dashboard:', error);
-            this.showError('Failed to refresh dashboard');
+            // console.error('Error refreshing dashboard:', error);
+            // this.showError('Failed to refresh dashboard');
         } finally {
             this.hideLoading();
         }
