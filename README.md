@@ -25,6 +25,14 @@ Dalam bisnis ritel modern, data penjualan adalah aset strategis untuk merekam pe
 
 ---
 
+## 📁 Tentang Dataset
+Dataset yang digunakan dalam proyek ini diambil dari platform **Kaggle**, berjudul *"Nike Sales"*.
+* **Cakupan Data:** Transaksi penjualan produk Nike di Amerika Serikat.
+* **Periode Waktu:** Tahun 2020 hingga 2021.
+* **Isi Dataset:** Mencakup informasi terkait tanggal invoice, wilayah penjualan, produk, harga per unit, dan jumlah unit terjual.
+
+---
+
 ## 🎯 Rumusan Masalah
 Analisis ini difokuskan untuk menjawab empat pertanyaan bisnis utama:
 1. Bagaimana perbandingan tren penjualan bulanan antara tahun 2020 dan 2021 (Year-on-Year)?
@@ -36,9 +44,9 @@ Analisis ini difokuskan untuk menjawab empat pertanyaan bisnis utama:
 
 ## 🛠️ Metodologi
 Proses analisis dilakukan dengan tahapan:
-* **Data Loading & Cleaning:** Menggunakan **Pandas** untuk memuat dataset dan mengubah format tanggal.
-* **Feature Engineering:** Membuat kolom *Total Sales* (Price per Unit * Units Sold) untuk mendapatkan nilai pendapatan aktual.
-* **Visualization:** Menggunakan **Matplotlib** dan **Seaborn** untuk membuat grafik yang relevan.
+* **Data Loading & Cleaning:** Menggunakan **Pandas** untuk memuat dataset dan mengubah format tanggal menjadi tipe datetime.
+* **Feature Engineering:** Membuat kolom *Total Sales* (hasil perkalian *Price per Unit* * *Units Sold*) untuk mendapatkan nilai pendapatan aktual.
+* **Visualization:** Menggunakan **Matplotlib** dan **Seaborn** untuk membuat grafik yang relevan dengan rumusan masalah.
 
 ---
 
@@ -49,13 +57,14 @@ Berdasarkan dashboard yang telah dikembangkan:
 * **Total Units Sold:** 241,984
 * **Avg Price/Unit:** \$44.74
 * **Unique Products:** 6
+* **Unique Regions:** 5
 
 ---
 
 ## 💡 Hasil Analisis & Pembahasan
 
 ### 1. Tren Penjualan Bulanan (2020 vs 2021)
-* **Dampak Awal 2020:** Penurunan tajam terjadi pada Maret-Mei 2020, berkorelasi dengan awal pandemi COVID-19.
+* **Dampak Awal 2020:** Penurunan tajam terjadi pada Maret-Mei 2020, berkorelasi dengan awal pandemi COVID-19 di AS.
 * **Pemulihan 2021:** Tahun 2021 menunjukkan tren yang jauh lebih positif dan stabil, dengan penjualan hampir setiap bulan lebih tinggi dibanding 2020.
 * **Puncak Musiman:** Tren kenaikan signifikan terlihat menuju akhir tahun (Oktober-Desember), mengindikasikan pengaruh kuat musim liburan (*holiday season*).
 
@@ -75,21 +84,49 @@ Berdasarkan dashboard yang telah dikembangkan:
 
 ---
 
-## 🎨 Keputusan Desain Visual
-* **Line Chart Multi-garis:** Dipilih untuk tren waktu agar audiens dapat membandingkan fluktuasi 2020 vs 2021 secara langsung dalam satu bidang pandang.
-* **Horizontal Bar Chart:** Digunakan untuk analisis per negara bagian karena banyaknya kategori, memberikan ruang yang lebih baik untuk label agar mudah dibaca.
-* **Donut Chart (Agregasi Wilayah):** Dipilih daripada *pie chart* seluruh negara bagian yang terlalu padat, agar proporsi kontribusi pasar per wilayah lebih mudah dipahami.
+## 🎨 Rationale Desain
+Keputusan desain visual diambil untuk memastikan informasi tersampaikan efektif:
+
+### Visual Encodings & Alternatif
+* **Tren Waktu (Line Chart):** Kami memilih *multi-line chart* karena dianggap paling efektif untuk menunjukkan perubahan data *time-series* secara kontinu.
+    * *Alternatif:* Bar chart terpisah per tahun.
+    * *Keputusan Akhir:* Line chart dipilih agar audiens dapat membandingkan pola fluktuasi antara 2020 dan 2021 secara langsung dalam satu bidang pandang.
+* **Kategori Banyak (Horizontal Bar Chart):** Digunakan untuk analisis per negara bagian.
+    * *Alternatif:* Vertical bar chart.
+    * *Keputusan Akhir:* Grafik horizontal dipilih karena banyaknya jumlah negara bagian. Ini memberikan ruang yang lebih baik agar label tetap terbaca jelas tanpa perlu memiringkan teks.
+* **Proporsi Wilayah (Donut Chart - Agregasi):**
+    * *Alternatif:* Pie chart yang menampilkan seluruh negara bagian.
+    * *Keputusan Akhir:* Berdasarkan eksplorasi awal, menampilkan seluruh negara bagian dalam satu pie chart terlalu padat. Diputuskan untuk melakukan agregasi ke tingkat Wilayah (Region) menggunakan Donut Chart agar proporsi kontribusi pasar lebih mudah dipahami.
+
+### Interaksi
+* **Filtering:** Dashboard dilengkapi filter interaktif (Year, Region, Product, Retailer) untuk memungkinkan pengguna mengeksplorasi data secara spesifik sesuai kebutuhan analisis mereka.
+
+---
+
+## ⚙️ Proses Pengembangan
+
+### Pembagian Tugas
+Pekerjaan dibagi berdasarkan keahlian anggota tim untuk efisiensi:
+* **Data Preparation:** Evan (Pencarian Dataset & Eksplorasi Awal) dan Rizqi (Pembersihan Data & Analisis Awal).
+* **Visualization & Dashboarding:** Faza (Pengembang Dashboard Utama) dan Revan (Spesialis Visualisasi/Polishing).
+* **Reporting:** Marganda (Penyusunan Laporan & Storytelling).
+
+### Estimasi Waktu & Tantangan
+* **Total Waktu Pengembangan:** Sekitar 13 hari kerja (akumulasi waktu seluruh anggota), dengan rincian:
+    * Rizqi, Faza, Revan: ~3 hari/orang
+    * Evan, Zuhdi: ~2 hari/orang
+* **Aspek Tersulit:** Mengimplementasikan fitur **filter data** pada dashboard web agar dapat berfungsi secara responsif dan akurat terhadap keseluruhan visualisasi.
 
 ---
 
 ## 📑 Kesimpulan
-1.  **Pemulihan Pasca-Pandemi:** Kinerja penjualan Nike pulih sangat kuat di tahun 2021.
+1.  **Pemulihan Pasca-Pandemi:** Kinerja penjualan Nike pulih sangat kuat di tahun 2021 setelah volatilitas awal 2020.
 2.  **Produk Andalan:** *Men's Street Footwear* adalah tulang punggung pendapatan, namun *Women's Apparel* menunjukkan potensi pertumbuhan krusial.
 3.  **Fokus Geografis:** Wilayah West AS dan negara bagian padat (seperti New York) wajib diprioritaskan.
 4.  **Kekuatan Brand:** Nike memiliki fleksibilitas penetapan harga karena loyalitas konsumen yang tinggi.
 
 ---
 
-## 🔗 Referensi Dataset & Tools
-* Kaggle Dataset: [Nike Sales](https://www.kaggle.com/datasets/krishnavamsis/nike-sales)
-* Inspirasi Dashboard Tableau: [Link](https://public.tableau.com/app/profile/hamizan.hibatullah/viz/NIKEDashboardSalesReport/Dashboard1)
+## 📚 Referensi & Acknowledgments
+* **Dataset:** [Kaggle - Nike Sales](https://www.kaggle.com/datasets/krishnavamsis/nike-sales)
+* **Inspirasi Visualisasi:** [Tableau Public Dashboard](https://public.tableau.com/app/profile/hamizan.hibatullah/viz/NIKEDashboardSalesReport/Dashboard1)
